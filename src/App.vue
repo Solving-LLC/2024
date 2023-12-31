@@ -13,14 +13,18 @@
     <!-- List of Other Timezones -->
     <div v-for="(city, index) in otherCities" :key="index" class="city">
       {{ city.name }} ({{ city.timezone }})
-        {{ formatTimeLeftString(city.timeLeft) }}
+      {{ formatTimeLeftString(city.timeLeft) }}
     </div>
   </div>
 </template>
 
 <script>
 import cities from "./cities";
-import { calculateTimeLeftMS, formatTimeLeftString, mergeTimezones } from "./utils"; // Remove unused import statement
+import {
+  calculateTimeLeftMS,
+  formatTimeLeftString,
+  mergeTimezones,
+} from "./utils"; // Remove unused import statement
 
 export default {
   name: "App",
@@ -40,20 +44,22 @@ export default {
   computed: {
     // Sort cities by time left and find the closest one
     sortedCities() {
-    return [...this.allCities]
-      .filter(city => city.timeLeft && city.timeLeft.totalMilliseconds > 0) // Consider only future dates
-      .sort((a, b) => {
-        // Primary sort based on time left
-        const timeDiff = Math.floor((a.timeLeft.totalMilliseconds - b.timeLeft.totalMilliseconds) / 1000);
-        if (timeDiff !== 0) return timeDiff;
+      return [...this.allCities]
+        .filter((city) => city.timeLeft && city.timeLeft.totalMilliseconds > 0) // Consider only future dates
+        .sort((a, b) => {
+          // Primary sort based on time left
+          const timeDiff = Math.floor(
+            (a.timeLeft.totalMilliseconds - b.timeLeft.totalMilliseconds) / 1000
+          );
+          if (timeDiff !== 0) return timeDiff;
 
-        // Secondary sort based on city name when time left is the same
-        return (a.name > b.name ? 1 : -1);
-      });
-  },
-  mergedCities() {
-    return mergeTimezones(this.sortedCities);
-  },
+          // Secondary sort based on city name when time left is the same
+          return a.name > b.name ? 1 : -1;
+        });
+    },
+    mergedCities() {
+      return mergeTimezones(this.sortedCities);
+    },
     closestCity() {
       return this.mergedCities.find((city) => city.timeLeft !== null);
     },
