@@ -84,6 +84,11 @@ export default {
 </script>
 
 <style>
+div {
+  background-color: #000;
+  color: #fff;
+
+}
 /* Общие стили */
 #app {
   font-family: 'Arial', sans-serif;
@@ -112,14 +117,12 @@ export default {
 
 .next-caption {
   font-size: 4vh; /* Увеличенный размер для заголовка */
-  color: #007bff; /* Синий цвет для заголовка */
   margin-bottom: 1vh;
 }
 
 .next-cities,
 .next-timezones {
   font-size: 3vh; /* Шрифт для городов и часовых поясов */
-  color: #495057; /* Темно-серый цвет текста */
   margin-bottom: 0.5vh;
 }
 
