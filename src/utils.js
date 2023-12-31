@@ -6,13 +6,31 @@ export function calculateTimeLeftMS(timezone) {
     const difference = newYearLocal.diff(nowLocal);
 
     return {
-        totalMilliseconds: difference,
+        totalMilliseconds: Math.floor(difference / 1000) * 1000,
         formatted: formatTimeLeftString(difference),
     };
 }
 
 
+/* */
 
+export function mergeTimezones(cities) {
+    if (!cities.find((city) => !!city.timeLeft?.totalMilliseconds)) return cities;
+    const left = [...new Set(cities.map((city) => city.timeLeft?.totalMilliseconds))];
+    return left.map((timeLeft) => {
+        const filtered_cities = cities.filter((city) => city?.timeLeft?.totalMilliseconds < timeLeft+1000 && city?.timeLeft?.totalMilliseconds > timeLeft-1000);
+        const merged = {
+            ...filtered_cities[0],
+            timeLeft: {
+                ...filtered_cities[0].timeLeft,
+                formatted: formatTimeLeftString(timeLeft),
+            },
+            name: filtered_cities.map((city) => city.name).join(', '),
+            timezone: filtered_cities.map((city) => city.timezone).join(', '),
+        };
+        return merged;
+    });
+}
 
   export function formatTimeLeft(difference) {
     return {

@@ -20,7 +20,7 @@
 
 <script>
 import cities from "./cities";
-import { calculateTimeLeftMS, formatTimeLeftString } from "./utils"; // Remove unused import statement
+import { calculateTimeLeftMS, formatTimeLeftString, mergeTimezones } from "./utils"; // Remove unused import statement
 
 export default {
   name: "App",
@@ -51,11 +51,14 @@ export default {
         return (a.name > b.name ? 1 : -1);
       });
   },
+  mergedCities() {
+    return mergeTimezones(this.sortedCities);
+  },
     closestCity() {
-      return this.sortedCities.find((city) => city.timeLeft !== null);
+      return this.mergedCities.find((city) => city.timeLeft !== null);
     },
     otherCities() {
-      return this.sortedCities.filter((city) => city !== this.closestCity);
+      return this.mergedCities.filter((city) => city !== this.closestCity);
     },
   },
 
