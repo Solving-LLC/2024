@@ -7,6 +7,7 @@ const cities = [
   { name: "Papua New Guinea", timezone: "Pacific/Port_Moresby" },
   { name: "Beijing", timezone: "Asia/Shanghai" },
   { name: "Bangkok", timezone: "Asia/Bangkok" },
+  { name: "Thailand", timezone: "Asia/Bangkok" },
   { name: "Delhi", timezone: "Asia/Kolkata" },
   { name: "Dubai", timezone: "Asia/Dubai" },
   { name: "Moscow", timezone: "Europe/Moscow" },
