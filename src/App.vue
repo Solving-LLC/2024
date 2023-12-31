@@ -98,6 +98,13 @@ div {
   padding: 2vh 1vw;
 }
 
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #000;
+  color: #fff;
+}
+
 /* Стили для специальной карточки ближайшего часового пояса */
 .next {
   border: 1px solid #dee2e6;
